@@ -4,6 +4,19 @@ const addButton = document.getElementById("add")// lo mismo con id="add"
 
 //now i should keep going on how to retrieve data from local storage to keep the list items
 
+let items = getItems()
+
+function getItems() {
+    const value = localStorage.getItem("todo-test") || "[]"; // "todo" =  key word in local storage
+    return JSON.parse(value);
+}
+
+//once the item is added, wrefresh what was saved
+
+function setItems(items) {
+    const itemsJson = JSON.stringify(items);
+    localStorage.setItem("todo-test", itemsJson);
+}
 
 
 
