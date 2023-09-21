@@ -17,9 +17,19 @@ function setItems(items) {
     const itemsJson = JSON.stringify(items);
     localStorage.setItem("todo-test", itemsJson);
 }
+//add items
 
+function addItem(){
+    items.unshift({
+        description:" ",
+        completed: false
+    });
 
+    setItems(items); //adds to local storage
+    refreshList();
+}
 
+console.log(items);
 
 
 
