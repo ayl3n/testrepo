@@ -27,7 +27,46 @@ function addItem(){
 
     setItems(items); //adds to local storage
     refreshList();
+    setItems(items);
+    refreshList();
 }
+
+function updateItem(item, key, value) {
+    item[key] = value;
+
+    setItems(items);
+    refreshList();
+}
+
+function refreshList() {
+    ITEMS_CONTAINER.innerHTML = "";
+
+    for (const item of items){
+        //get TEMPLATE ELEMENT and go inside it, get the CONTENT (div) and clone it
+        //and you get to treat the div as object
+        const itemElement = ITEM_TEMPLATE.content.cloneNode(true);
+        const descriptionInput = itemElement.querySelector(".item-description");
+        const completedInput = itemElement.querySelector(".item-completed");
+
+        descriptionInput.value = item.description; //value comes from addItem()
+        completedInput.checked = item.completed; //check box
+
+        descriptionInput.addEventListener("change", () => {
+            updateItem(item , "description", descriptionInput.value);
+        })
+
+        completedInput.addEventListener("change", () => {
+            updateItem(item , "completed", completedInput.checked);
+        })
+
+        ITEMS_CONTAINER.append(itemElement);
+    }
+}
+
+ADD_BUTTON.addEventListener("click", () => {
+    addItem();
+})
+
 
 console.log(items);
 
